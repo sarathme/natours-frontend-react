@@ -5,15 +5,7 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 function Header() {
-  const { logout } = useAuth();
-
-  const { user, errorFetchingUser, userError } = useCurrentUser();
-
-  useEffect(() => {
-    if (errorFetchingUser) {
-      toast.error(userError.message);
-    }
-  }, [errorFetchingUser, userError]);
+  const { logout, user, isFetching } = useAuth();
 
   return (
     <header className="header">
@@ -26,7 +18,7 @@ function Header() {
         <img src="/img/logo-white.png" alt="Natours Logo" />
       </div>
       <nav className="nav nav--user">
-        {user && (
+        {user && !isFetching && (
           <nav className="nav nav--user">
             <button className="nav__el nav__el--logout" onClick={logout}>
               Logout
@@ -37,7 +29,11 @@ function Header() {
           </nav>
         )}
 
-        {!user && (
+        {isFetching && !user && (
+          <button className="nav__el nav__el--logout"></button>
+        )}
+
+        {!user && !isFetching && (
           <>
             <Link className="nav__el" to="/login">
               Log in

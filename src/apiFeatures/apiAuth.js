@@ -14,7 +14,7 @@ export async function loginUser(credentials) {
     console.error(error);
 
     console.log(error.response);
-    throw new Error(error.response.data.error);
+    throw new Error(error.response.data.message);
   }
 }
 

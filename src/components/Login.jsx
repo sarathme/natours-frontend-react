@@ -9,6 +9,8 @@ function Login() {
   const { login, isLoggingIn } = useLogin();
   const navigate = useNavigate();
 
+  console.log(isLoggingIn);
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -66,7 +68,7 @@ function Login() {
           </div>
           <div className="form__group">
             <button className="btn btn--green" disabled={isLoggingIn}>
-              Login
+              {isLoggingIn ? "..." : "Login"}
             </button>
           </div>
         </form>

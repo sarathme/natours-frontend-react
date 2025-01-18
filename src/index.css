@@ -225,6 +225,11 @@ body {
   background-color: #2e864b;
 }
 
+.btn:disabled {
+  background-color: #62885c;
+  cursor: not-allowed;
+}
+
 .btn--white {
   background-color: #fff;
   color: #777;

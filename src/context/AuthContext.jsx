@@ -1,12 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createContext, useContext, useState } from "react";
-import {
-  fetchCurrentUser,
-  loginUser,
-  logoutUser,
-} from "../apiFeatures/apiAuth";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createContext, useContext, useEffect, useState } from "react";
+import { logoutUser } from "../apiFeatures/apiAuth";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 const AuthContext = createContext();
 
@@ -15,16 +12,20 @@ export const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
 
-  function addUser(user) {
-    setUser(user);
-  }
+  const { isFetching, currUser } = useCurrentUser();
+
+  useEffect(() => {
+    if (currUser && !isFetching) {
+      setUser(currUser);
+    }
+  }, [currUser, setUser, isFetching]);
 
   const { mutate: logout, isLoading: isLoggingout } = useMutation({
     mutationFn: logoutUser,
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       queryClient.setQueryData(["user"], null);
       setUser(null);
+      toast.success("Logged out successfully");
     },
     onError: (err) => {
       toast.error(err.message);
@@ -32,7 +33,8 @@ export const AuthProvider = ({ children }) => {
   });
 
   return (
-    <AuthContext.Provider value={{ user, addUser, logout }}>
+    <AuthContext.Provider
+      value={{ user, logout, setUser, isFetching, isLoggingout }}>
       {children}
     </AuthContext.Provider>
   );

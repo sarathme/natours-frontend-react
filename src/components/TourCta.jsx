@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import PayButton from "./PayButton";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 function TourCta({ tour }) {
   const { user } = useAuth();
+
+  console.log(user);
 
   return (
     <section className="section-cta">
@@ -26,11 +30,7 @@ function TourCta({ tour }) {
           <p className="cta__text">
             {`${tour.duration} days. 1 adventure. Infinite memories. Make it yours today!`}
           </p>
-          {user && (
-            <button className="btn btn--green span-all-rows">
-              Book tour now!
-            </button>
-          )}
+          {user && <PayButton tour={tour} />}
           {!user && (
             <Link className="btn btn--green span-all-rows" to="/login">
               Login to book tour
