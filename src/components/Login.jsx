@@ -9,8 +9,6 @@ function Login() {
   const { login, isLoggingIn } = useLogin();
   const navigate = useNavigate();
 
-  console.log(isLoggingIn);
-
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -18,7 +16,8 @@ function Login() {
     login(
       { email, password },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          localStorage.setItem(data.token);
           navigate(-1);
         },
       }

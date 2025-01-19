@@ -1,15 +1,18 @@
 import axios from "axios";
+
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+  "jwt"
+)}`;
 const url = `${import.meta.env.VITE_API_URL}/api/v1/users`;
 
 export async function loginUser(credentials) {
   try {
-    const res = await axios.post(`${url}/login`, credentials, {
-      withCredentials: true,
-    });
+    const res = await axios.post(`${url}/login`, credentials);
 
     console.log(res.data.data.user);
 
-    return res.data.data.user;
+    return res.data.data;
   } catch (error) {
     console.error(error);
 
@@ -20,7 +23,7 @@ export async function loginUser(credentials) {
 
 export async function logoutUser() {
   try {
-    const res = await axios.get(`${url}/logout`, { withCredentials: true });
+    const res = await axios.get(`${url}/logout`);
     console.log(res);
     return res;
   } catch (err) {
@@ -32,9 +35,7 @@ export async function logoutUser() {
 
 export async function fetchCurrentUser() {
   try {
-    const res = await axios.get(`${url}/me`, {
-      withCredentials: true,
-    });
+    const res = await axios.get(`${url}/me`);
 
     return res.data.data.data;
   } catch (err) {
