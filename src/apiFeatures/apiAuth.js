@@ -36,9 +36,10 @@ export async function logoutUser() {
 export async function fetchCurrentUser() {
   try {
     const res = await axios.get(`${url}/me`);
-
+    console.log(res);
     return res.data.data.data;
   } catch (err) {
+    console.log(err);
     throw new Error("You are not logged in. Please login to book tours");
   }
 }
