@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { getAllTours } from "./../apiFeatures/apiTours";
 import OverviewCard from "./OverviewCard";
 import { useQuery } from "@tanstack/react-query";
@@ -9,8 +8,6 @@ function Overview() {
     queryKey: ["tours"],
     queryFn: getAllTours,
   });
-
-  console.log(tours);
 
   return (
     <section className="overview">

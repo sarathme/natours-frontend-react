@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useCurrentUser } from "../hooks/useCurrentUser";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
 
 function Header() {
   const { logout, user, isFetching } = useAuth();
 
+  console.log("---------------Header------------------");
+  console.log(isFetching);
+  console.log(user);
+
+  console.log("---------------Header------------------");
   return (
     <header className="header">
       <nav className="nav nav--tours">

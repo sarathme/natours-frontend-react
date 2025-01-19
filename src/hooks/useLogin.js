@@ -8,9 +8,9 @@ export function useLogin() {
   const queryClient = useQueryClient();
   const { mutate: login, isPending: isLoggingIn } = useMutation({
     mutationFn: loginUser,
-    onSuccess: (user) => {
-      queryClient.setQueryData(["user"], user);
-      setUser(user);
+    onSuccess: (data) => {
+      queryClient.setQueryData(["user"], data.data.user);
+      setUser(data.data.user);
       toast.success("Logged in successfully");
     },
     onError: (err) => {

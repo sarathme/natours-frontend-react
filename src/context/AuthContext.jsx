@@ -25,9 +25,11 @@ export const AuthProvider = ({ children }) => {
     onSuccess: () => {
       queryClient.setQueryData(["user"], null);
       setUser(null);
+      localStorage.removeItem("jwt");
       toast.success("Logged out successfully");
     },
     onError: (err) => {
+      console.log(err);
       toast.error(err.message);
     },
   });

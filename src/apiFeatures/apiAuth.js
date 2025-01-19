@@ -12,7 +12,7 @@ export async function loginUser(credentials) {
 
     console.log(res.data.data.user);
 
-    return res.data.data;
+    return res.data;
   } catch (error) {
     console.error(error);
 
