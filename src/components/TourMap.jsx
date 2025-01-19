@@ -1,6 +1,14 @@
 import { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import pinIcon from "../assets/img/pin.png";
 import L from "leaflet";
+
+const customIcon = new L.icon({
+  iconUrl: pinIcon,
+  iconSize: [32, 40],
+});
+
+console.log(customIcon);
 
 function TourMap({ tour }) {
   return (
@@ -22,7 +30,8 @@ function TourMap({ tour }) {
         {tour.locations.map((location) => (
           <Marker
             position={[location.coordinates[1], location.coordinates[0]]}
-            key={location._id}>
+            key={location._id}
+            icon={customIcon}>
             <Popup closeOnClick={false} autoClose={false}>
               {location.description}
             </Popup>
