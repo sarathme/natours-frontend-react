@@ -17,7 +17,7 @@ function Login() {
       { email, password },
       {
         onSuccess: (data) => {
-          localStorage.setItem(data.token);
+          localStorage.setItem("jwt", data.token);
           navigate(-1);
         },
       }
