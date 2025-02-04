@@ -4,11 +4,6 @@ import { useAuth } from "../context/AuthContext";
 function Header() {
   const { logout, user, isFetching } = useAuth();
 
-  console.log("---------------Header------------------");
-  console.log(isFetching);
-  console.log(user);
-
-  console.log("---------------Header------------------");
   return (
     <header className="header">
       <nav className="nav nav--tours">

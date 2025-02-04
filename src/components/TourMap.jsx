@@ -8,8 +8,6 @@ const customIcon = new L.icon({
   iconSize: [32, 40],
 });
 
-console.log(customIcon);
-
 function TourMap({ tour }) {
   return (
     <section className="section-map">
