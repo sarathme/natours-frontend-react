@@ -6,7 +6,6 @@ import { useCurrentUser } from "../hooks/useCurrentUser";
 function TourCta({ tour }) {
   const { user } = useAuth();
 
-  console.log("User", user);
   return (
     <section className="section-cta">
       <div className="cta">

@@ -29,9 +29,10 @@ export const AuthProvider = ({ children }) => {
       toast.success("Logged out successfully");
     },
     onError: (err) => {
-      console.log(err);
+      console.error(err);
       toast.error(err.message);
     },
+    retry: false,
   });
 
   return (

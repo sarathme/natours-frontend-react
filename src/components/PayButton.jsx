@@ -2,7 +2,6 @@ import { useOrder } from "../hooks/useOrder";
 
 function PayButton({ tour }) {
   const { createOrder, isCreatingOrder } = useOrder();
-  console.log(tour);
 
   function handleOrder(e) {
     e.preventDefault();

@@ -12,7 +12,6 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("here");
     login(
       { email, password },
       {
@@ -25,8 +24,6 @@ function Login() {
 
     setEmail("");
     setPassword("");
-
-    // console.log(res.data);
   }
 
   return (

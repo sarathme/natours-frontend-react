@@ -12,7 +12,6 @@ export function useCurrentUser() {
   } = useQuery({
     queryKey: ["user"],
     queryFn: fetchCurrentUser,
-
     retry: false,
   });
 

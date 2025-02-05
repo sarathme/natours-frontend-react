@@ -6,8 +6,6 @@ export function useOrder() {
   const { isPending: isCreatingOrder, mutate: createOrder } = useMutation({
     mutationFn: (orderData) => getCheckout(orderData),
     onSuccess: (order) => {
-      console.log("Order", order);
-
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY,
         amount: order.amount,
@@ -31,7 +29,6 @@ export function useOrder() {
       razorpay.open();
     },
     onError: (err) => {
-      console.log(err);
       toast.error("Payment unsuccessful. Please try again");
     },
   });

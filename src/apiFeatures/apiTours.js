@@ -22,7 +22,7 @@ export async function getTour(tourId) {
 
     return res.data.data.data;
   } catch (err) {
-    console.log(err.response.data);
+    console.error(err.response.data);
     throw new Error(err.response.data.message);
   }
 }

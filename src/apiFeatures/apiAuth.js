@@ -10,13 +10,10 @@ export async function loginUser(credentials) {
   try {
     const res = await axios.post(`${url}/login`, credentials);
 
-    console.log(res.data.data.user);
-
     return res.data;
   } catch (error) {
     console.error(error);
 
-    console.log(error.response);
     throw new Error(error.response.data.message);
   }
 }
@@ -24,11 +21,10 @@ export async function loginUser(credentials) {
 export async function logoutUser() {
   try {
     const res = await axios.get(`${url}/logout`);
-    console.log(res);
+
     return res;
   } catch (err) {
-    console.log(err);
-
+    console.error(err);
     throw new Error("Can't logout. Please try again");
   }
 }
@@ -36,10 +32,10 @@ export async function logoutUser() {
 export async function fetchCurrentUser() {
   try {
     const res = await axios.get(`${url}/me`);
-    console.log(res);
+
     return res.data.data.data;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     throw new Error("You are not logged in. Please login to book tours");
   }
 }
