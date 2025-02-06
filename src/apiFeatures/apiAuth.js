@@ -1,9 +1,6 @@
 import axios from "axios";
 
-axios.defaults.withCredentials = true;
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-  "jwt"
-)}`;
+axios.defaults.withCredentials = true
 const url = `${import.meta.env.VITE_API_URL}/api/v1/users`;
 
 export async function loginUser(credentials) {
@@ -31,7 +28,7 @@ export async function logoutUser() {
 
 export async function fetchCurrentUser() {
   try {
-    const res = await axios.get(`${url}/me`);
+    const res = await axios.get(`${url}/me`,{headers: "Authorization": `Bearer ${localstorage.getItem("jwt")});
 
     return res.data.data.data;
   } catch (err) {
