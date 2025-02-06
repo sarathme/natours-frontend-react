@@ -1,8 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { getCheckout } from "../apiFeatures/apiBookings";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export function useOrder() {
+  const navigate = useNavigate();
   const { isPending: isCreatingOrder, mutate: createOrder } = useMutation({
     mutationFn: (orderData) => getCheckout(orderData),
     onSuccess: (order) => {
@@ -15,14 +17,21 @@ export function useOrder() {
         order_id: order.id,
         handler: (response) => {
           toast.success("Payment successful");
+          navigate(-1, { replace: true });
         },
         prefill: {
           name: "Customer Name",
           email: "customer@example.com",
           contact: "9876543210",
         },
+
         theme: {
-          color: "#F37254",
+          color: "#7dd56f",
+        },
+        modal: {
+          ondismiss: () => {
+            toast.error("Payment cancelled");
+          },
         },
       };
       const razorpay = new window.Razorpay(options);
