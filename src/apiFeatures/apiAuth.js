@@ -28,7 +28,7 @@ export async function logoutUser() {
 
 export async function fetchCurrentUser() {
   try {
-    const res = await axios.get(`${url}/me`,{headers: "Authorization": `Bearer ${localStorage.getItem("jwt")}`});
+    const res = await axios.get(`${url}/me`,{headers: {"Authorization": `Bearer ${localStorage.getItem("jwt")}`}});
 
     return res.data.data.data;
   } catch (err) {
