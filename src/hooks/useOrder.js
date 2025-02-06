@@ -1,10 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { getCheckout } from "../apiFeatures/apiBookings";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function useOrder() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { isPending: isCreatingOrder, mutate: createOrder } = useMutation({
     mutationFn: (orderData) => getCheckout(orderData),
     onSuccess: (order) => {
