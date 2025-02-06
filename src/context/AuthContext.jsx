@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useState } from "react";
 import { logoutUser } from "../apiFeatures/apiAuth";
 import toast from "react-hot-toast";
@@ -14,30 +14,54 @@ export const AuthProvider = ({ children }) => {
 
   const { isFetching, currUser } = useCurrentUser();
 
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
   useEffect(() => {
     if (currUser && !isFetching) {
       setUser(currUser);
     }
   }, [currUser, setUser, isFetching]);
 
-  const { mutate: logout, isLoading: isLoggingout } = useMutation({
-    mutationFn: logoutUser,
-    onSuccess: () => {
+  // const { mutate: logout, isLoading: isLoggingout } = useMutation({
+  //   mutationFn: logoutUser,
+  //   onSuccess: () => {
+  //     queryClient.setQueryData(["user"], null);
+  //     setUser(null);
+  //     localStorage.removeItem("jwt");
+  //     toast.success("Logged out successfully");
+  //   },
+  //   onError: (err) => {
+  //     console.error(err);
+  //     toast.error(err.message);
+  //   },
+  //   retry: false,
+  // });
+
+  // useQuery({
+  //   queryKey: ["user"],
+  //   queryFn: logoutUser,
+  //   retry: false,
+  // });
+
+  async function logout() {
+    try {
+      setIsLoggingOut(true);
+      const res = await logoutUser();
       queryClient.setQueryData(["user"], null);
       setUser(null);
       localStorage.removeItem("jwt");
-      toast.success("Logged out successfully");
-    },
-    onError: (err) => {
-      console.error(err);
+      console.log(res);
+    } catch (err) {
       toast.error(err.message);
-    },
-    retry: false,
-  });
+    } finally {
+      setIsLoggingOut(false);
+    }
+    await logoutUser();
+  }
 
   return (
     <AuthContext.Provider
-      value={{ user, logout, setUser, isFetching, isLoggingout }}>
+      value={{ user, logout, setUser, isFetching, isLoggingOut }}>
       {children}
     </AuthContext.Provider>
   );
