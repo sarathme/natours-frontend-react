@@ -2,7 +2,6 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-console.log(`Bearer ${localStorage.getItem("jwt")}`);
 const url = `${import.meta.env.VITE_API_URL}/api/v1/bookings`;
 
 export async function getCheckout(orderData) {

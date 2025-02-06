@@ -1,9 +1,7 @@
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-  "jwt"
-)}`;
+
 const url = `${import.meta.env.VITE_API_URL}/api/v1/tours`;
 export async function getAllTours() {
   try {

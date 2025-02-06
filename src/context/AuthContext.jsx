@@ -50,7 +50,6 @@ export const AuthProvider = ({ children }) => {
       queryClient.setQueryData(["user"], null);
       setUser(null);
       localStorage.removeItem("jwt");
-      console.log(res);
     } catch (err) {
       toast.error(err.message);
     } finally {

@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchCurrentUser } from "../apiFeatures/apiAuth";
-import { useAuth } from "../context/AuthContext";
-import toast from "react-hot-toast";
 
 export function useCurrentUser() {
   const {
