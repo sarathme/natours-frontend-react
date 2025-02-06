@@ -11,6 +11,7 @@ export function useLogin() {
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data.data.user);
       setUser(data.data.user);
+localStorage.setItem("jwt", data.data.token)
       toast.success("Logged in successfully");
     },
     onError: (err) => {
